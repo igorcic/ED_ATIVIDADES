@@ -113,3 +113,43 @@ int consulta_nome(lista*li, char nome, struct cadastro *al){
     }
 
 }
+int remover_mat(lista*li, int mat){
+    if(li == NULL)  return -1;
+    bloc *no = *li;
+    while(no!= NULL && no->dados.matricula != mat){
+        no = no->Hash_b;
+    }
+    if(no == NULL){
+        return 0;
+    }
+    if(no->Hash_pai == NULL){
+        *li = no->Hash_b;
+    }else{
+        no->Hash_pai->Hash_b = no->Hash_b;
+    }
+    if(no->Hash_b != NULL){
+        no->Hash_b->Hash_pai = no->Hash_pai;
+    }
+    free(no);
+    return 1;
+}
+int remover_nome(lista*li, char nome){
+    if(li == NULL)  return -1;
+    bloc *no = *li;
+    while(no!= NULL && no->dados.nome != nome){
+        no = no->Hash_b;
+    }
+    if(no == NULL){
+        return 0;
+    }
+    if(no->Hash_pai == NULL){
+        *li = no->Hash_b;
+    }else{
+        no->Hash_pai->Hash_b = no->Hash_b;
+    }
+    if(no->Hash_b != NULL){
+        no->Hash_b->Hash_pai = no->Hash_pai;
+    }
+    free(no);
+    return 1;
+}
