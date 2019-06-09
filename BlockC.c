@@ -46,6 +46,7 @@ int lista_vazia(lista*li){
 
 }
 int inserir_ordenado(lista*li, struct cadastro al){
+    int x = 0;
     if(li == NULL)  return -1;
     bloc*no = (bloc*)malloc(sizeof(bloc));
     if(no == NULL)  return 0;
@@ -152,4 +153,36 @@ int remover_nome(lista*li, char nome){
     }
     free(no);
     return 1;
+}
+
+int verificar_nome(lista*li, char nome, struct cadastro *al){
+    if(li == NULL){
+        return -1;
+    }
+    bloc*no = *li;
+    while(no != NULL && no->dados.nome != nome){
+        no = no->Hash_b;
+    }
+    if(no == NULL){
+        return 0;
+    }else{
+        return 1;
+    }
+
+}
+
+int verificar_matri(lista*li, int matr, struct cadastro *al){
+    if(li == NULL){
+        return -1;
+    }
+    bloc*no = *li;
+    while(no != NULL && no->dados.nome != matr){
+        no = no->Hash_b;
+    }
+    if(no == NULL){
+        return 0;
+    }else{
+        return 1;
+    }
+
 }
